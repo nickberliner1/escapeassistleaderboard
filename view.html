@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+<img bg-image class="fullBg" ng-repeat="slide in slides"
+     ng-if="isCurrentSlideIndex($index)"
+     ng-src="{{slide.src}}">
+
+  <div ng-controller="TeamController as tCtrl">
+       <div ng-repeat="mbr in tCtrl.members" ng-repeat-owl-carousel carousel-init="tCtrl.carouselInitializer">
+         <h1>slide show</h1>
+       </div>
+  </div>
+
+
+<script src="ngRepeatOwlCaousel.min.js">
+  angular.module('app', ['ocNgRepeat']);
+  app.controller("TeamController", [ function() {
+      var ctrl;
+      ctrl = this;
+      ctrl.members = []
+
+      ctrl.carouselInitializer = function() {
+        $(".about-carousel").owlCarousel({
+          items: 3,
+          navigation: true,
+          pagination: false,
+          navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+        });
+      };
+    }
+  ]);
+</script>
+
+<script>
+
+var LeaderboardApp = angular.module('LeaderboardApp', ['ngAnimate', 'oitozero.ngSweetAlert', 'angularFileUpload']).config(function()
+
+{
+
+app.controller('MainCtrl', function ($scope, $timeout) {
+    var INTERVAL = 3000,
+        slides = [{id:"image00", src:"./images/image00.jpg"},
+        {id:"image01", src:"./img/bg1.jpg"},
+        {id:"image02", src:"./img/bg2.jpg"},
+        {id:"image03", src:"./img/bg3.jpg"},
+        {id:"image04", src:"./img/bg4.jpg"}];
+<pre><code>function setCurrentSlideIndex(index) {
+    $scope.currentIndex = index;
+}
+function isCurrentSlideIndex(index) {
+    return $scope.currentIndex === index;
+}
+function nextSlide() {
+    $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
+    $timeout(nextSlide, INTERVAL);
+}
+function loadSlides() {
+    $timeout(nextSlide, INTERVAL);
+}
+$scope.slides = slides;
+$scope.currentIndex = 0;
+$scope.setCurrentSlideIndex = setCurrentSlideIndex;
+$scope.isCurrentSlideIndex = isCurrentSlideIndex;
+loadSlides();
+</code></pre>
+});
+});
+</script>
+</body>
+</html>

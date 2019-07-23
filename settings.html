@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Settings</title>
+
+    <link rel="stylesheet" href="css/brad.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body class="display-body" data-ng-controller="LeaderboardCtrl">
+
+
+    <div class="container">
+      <div class="row" style="margin-top: 25px;">
+        <h3>Team Settings</h3>
+      </div>
+    </div>
+
+    <div class="well">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Room</th>
+                        <th>Team Name</th>
+                        <th>Team Photo</th>
+                        <th>Started At:</th>
+                        <th>Escape Time:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <form class="form-inline" role="form" ng-model="current.display.room.name">
+                              <div class="form-group">
+                                  <input type="text" ng-model="current.display.room.name">
+                              </div>
+                              <button type="submit" class="btn btn-default">Save</button>
+                          </form>
+                        </td>
+                        <td>
+                          <form class="form-inline" role="form" ng-model="team.team_name">
+                              <div class="form-group">
+                                  <input type="text" ng-model="team.team_name">
+                              </div>
+                              <button type="submit" class="btn btn-default">Save</button>
+                          </form>
+                        </td>
+                        <td>
+                          <form class="form-inline" role="form" ng-model="team.team_photo">
+                              <div class="form-group">
+                                <input type="file" ng-file-select="onFileSelect($files)" ng-model="team.team_photo">
+                                <img ng-src="{{team.team_photo}}" />
+                              </div>
+                              <button type="submit" class="btn btn-default">Save</button>
+                          </form>
+                        </td>
+                        <td>
+                          <form class="form-inline" role="form" ng-model="team.started_at">
+                              <div class="form-group">
+                                  <input type="text" ng-model="team.started_at">
+                              </div>
+                              <button type="submit" class="btn btn-default">Save</button>
+                          </form>
+                        </td>
+                        <td>
+                          <form class="form-inline" role="form" ng-model="team.escaped_time">
+                              <div class="form-group">
+                                  <input type="text" ng-model="team.escaped_time">
+                              </div>
+                              <button type="submit" class="btn btn-default">Save</button>
+                          </form>
+                        </td>
+                      </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+    <div class="container" ng-app="LeaderboardApp">
+        <div class="row" style="margin-top: 25px;" ng-app="LeaderboardApp">
+            <h3 type="text" ng-bind="companyName" ng-model="companyName">{{companyName}} Settings</h3>
+        </div>
+    </div>
+
+    <div class="containter">
+      <div class="well">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>Upload Logo</th>
+              <th>Change Text Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <form class="form-inline" role="form" ng-model="companyName">
+                    <div class="form-group">
+                        <input type="text" ng-model="companyName">
+
+                    <button type="submit" class="btn btn-default">Save</button>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <form>
+                    <div class="form-group">
+                        <input type="file" ng-file-select="onFileSelect($files)" ng-model="companyLogo">
+                        <img ng-src="{{companyLogo}}" />
+                    <button type="submit" class="btn btn-default">Save</button>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <form class="form-inline" role="form" ng-model="textColor">
+                    <div class="form-group">
+                        <select ng-model="backgroundColor" ng-change="textColor">
+                          <option>Red</option>
+                          <option>Blue</option>
+                          <option>Green</option>
+                          <option>Yellow</option>
+                        </select>
+                        <button ng-click="changeBackgroundColor">Save</button>
+                    </div>
+                    <div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="color">
+                      <button>Choose</button>
+                    </div>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+
+
+          <thead>
+            <tr>
+              <th>Change Background Color</th>
+              <th>Upload Background Image</th>
+              <th>Change Font</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <form class="form-inline" role="form" ng-model="backgroundColor">
+                    <div class="form-group">
+                        <select ng-model="backgroundColor" ng-change="changeBackgroundColor">
+                          <option>Red</option>
+                          <option>Blue</option>
+                          <option>Green</option>
+                          <option>Yellow</option>
+                        </select>
+                        <button ng-click="changeBackgroundColor">Save</button>
+                    </div>
+                    <div ng-colorwheel="{ size: 150, segments: 120 }" ng-model="color">
+                      <button>Choose</button>
+                    </div>
+                </form>
+                <td>
+                  <form>
+                      <div class="form-group">
+                          <input type="file" ng-file-select="onFileSelect($files)" ng-model="backgroundImage">
+                          <img ng-src="{{backgroundImage}}" />
+                      </div>
+                      <button type="submit" class="btn btn-default">Save</button>
+                  </form>
+                </td>
+                <td>
+                  <form class="form-inline" role="form" ng-model="fontslist">
+                      <div class="form-group">
+                        <div ng-app="LeaderboardApp">
+                          <div class="font-dropdown" tabindex="1" fd-font-dropdown>
+                            <span class="label" ng-style="{{'fontslist[selectedIdx].style'}}">{{fontslist[selectedIdx].name}}</span>
+                            <ul class="dropdown-list">
+                              <li ng-repeat="font in fontslist" ng-click="changeFont($index)" ng-class="{'sel': $index == selectedIdx}" ng-style="{{font.style}}">
+                                {{font.name}}
+                              </li>
+                            </ul>
+                          </div>
+                          <div>
+                            <googlefontselector font="currentDiscplay.timer_font"/>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+
+
+          <thead>
+            <tr>
+              <th>Upload Full-Screen Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <form>
+                    <div class="form-group">
+                        <input type="file" ng-file-select="onFileSelect($files)" ng-model="fullScreenImage">
+                        <img ng-src="{{fullScreenImage}}" />
+                    </div>
+                    <button type="submit" class="btn btn-default">Save</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+      </div>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script type="text/javascript" src="lib/jquery.min.js"></script>
+       <script type="text/javascript" src="lib/jquery.textfill.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="lib/bootstrap.min.js"></script>
+
+      <script src="lib/sweetalert.min.js"></script>
+
+      <script src="lib/angular.js"></script>
+      <script src="lib/angular-animate.js"></script>
+      <script src="lib/SweetAlert.js"></script>
+
+      <!-- font selecting scripts and styles -->
+      <script type="bower_components/angular-fontselect/dist/libs/webfontloader.js"></script>
+      <script type="bower_components/angular-fontselect/dist/angular-fontselect.js"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-route"></script>
+      <script src="js/google-font-selector.client.directive.js"></script>
+
+      <!-- controller for settings -->
+      <script>
+
+      LeaderboardApp.controller('SettingsCtrl', ['$scope', '$http', '$q', '$interval', '$timeout', '$location', '$filter', '$window', 'ERROR'
+
+        function ($scope, $http, $q, $interval, $timeout, $location, $window, ERROR) {
+
+          $scope.team.team_name = "";
+
+        }
+    ])
+
+    </body>
+  </html>
